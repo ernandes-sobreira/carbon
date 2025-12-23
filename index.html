@@ -4,6 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Carbono Quiz — Fases ⚛️🌍</title>
+
   <style>
     :root{
       --bg:#0b1220;
@@ -36,6 +37,7 @@
       display:flex; align-items:center; justify-content:space-between;
       gap:12px; margin-bottom: 14px; flex-wrap:wrap;
     }
+
     .brand{ display:flex; align-items:center; gap:12px; min-width: 260px; }
     .logo{
       width:48px; height:48px; border-radius: 14px;
@@ -49,6 +51,7 @@
       display:grid; place-items:center; font-size: 22px;
       filter: drop-shadow(0 4px 10px rgba(0,0,0,.35));
     }
+
     h1{ font-size: 20px; margin:0; letter-spacing:.2px; }
     .subtitle{ margin: 2px 0 0; color: var(--muted); font-size: 13px; line-height: 1.25; }
 
@@ -108,7 +111,7 @@
       border: 0;
       border-radius: 14px;
       padding: 12px 14px;
-      font-weight: 800;
+      font-weight: 900;
       color: #071019;
       transform: translateY(0);
       transition: transform .08s ease, filter .15s ease;
@@ -130,6 +133,10 @@
       background: rgba(255,79,183,.14);
       border: 1px solid rgba(255,79,183,.24);
     }
+    .btn-disabled{
+      filter: grayscale(1) opacity(.6);
+      cursor:not-allowed;
+    }
 
     .stats{ display:grid; grid-template-columns: 1fr 1fr; gap: 10px; }
     .stat{
@@ -139,7 +146,7 @@
       padding: 12px;
     }
     .stat .k{ font-size: 12px; color: var(--muted); }
-    .stat .v{ font-size: 18px; font-weight: 900; margin-top: 4px; }
+    .stat .v{ font-size: 18px; font-weight: 1000; margin-top: 4px; }
     .stat .s{ font-size: 12px; color: var(--muted); margin-top: 6px; line-height:1.25; }
 
     .progress{
@@ -157,10 +164,9 @@
       transition: width .25s ease;
     }
     .progress.sm{ height:10px; }
-    .progress.sm > div{ transition: width .2s ease; }
 
     .qwrap{ margin-top: 10px; }
-    .qtitle{ font-size: 18px; font-weight: 900; margin: 0 0 10px; line-height:1.25; }
+    .qtitle{ font-size: 18px; font-weight: 1000; margin: 0 0 10px; line-height:1.25; }
     .qmeta{ color: var(--muted); font-size: 12.5px; margin: 0 0 12px; }
 
     .answers{ display:grid; grid-template-columns: 1fr; gap: 10px; }
@@ -177,7 +183,7 @@
       overflow:hidden;
     }
     .answer:hover{ filter: brightness(1.06); }
-    .answer .tag{ font-size: 12px; opacity: .9; margin-right: 8px; font-weight: 900; }
+    .answer .tag{ font-size: 12px; opacity: .9; margin-right: 8px; font-weight: 1000; }
     .answer:before{
       content:"";
       position:absolute;
@@ -198,13 +204,15 @@
       display:none;
       animation: pop .22s ease both;
       line-height:1.35;
+      cursor:pointer;
+      user-select:none;
     }
     .toast small{ display:block; color: var(--muted); margin-top:6px; }
     @keyframes pop{
       from{ transform: translateY(6px); opacity:0; }
       to{ transform: translateY(0); opacity:1; }
     }
-    .toast.pin{ display:block !important; } /* se clicar, “fixa” */
+    .toast.pin{ display:block !important; } /* fica fixo se clicar */
 
     .hidden{ display:none !important; }
 
@@ -219,7 +227,7 @@
       z-index: 50;
     }
     .modal{
-      width: min(760px, 100%);
+      width: min(780px, 100%);
       border-radius: 22px;
       border: 1px solid rgba(255,255,255,.16);
       background: rgba(10,14,25,.78);
@@ -249,10 +257,11 @@
       border-radius: 999px;
       font-size: 12.5px;
       color: var(--text);
-      font-weight: 900;
+      font-weight: 1000;
       margin-top: 10px;
       flex-wrap:wrap;
       justify-content:center;
+      text-align:center;
     }
 
     #confetti{ position:absolute; inset:0; pointer-events:none; }
@@ -283,12 +292,12 @@
     }
     .trophy .left{ display:flex; align-items:center; gap:10px; }
     .trophy .emoji{ font-size: 22px; }
-    .trophy .name{ font-weight: 900; }
+    .trophy .name{ font-weight: 1000; }
     .trophy .desc{ font-size: 12px; color: var(--muted); margin-top: 2px; line-height:1.2; }
     .trophy.lock{ opacity:.55; filter: grayscale(.1); }
     .trophy .tag{
       font-size: 12px;
-      font-weight: 900;
+      font-weight: 1000;
       padding: 6px 10px;
       border-radius: 999px;
       border: 1px solid rgba(255,255,255,.16);
@@ -296,6 +305,22 @@
       color: var(--text);
       white-space:nowrap;
     }
+
+    /* Loja / Ranking */
+    .listItem{
+      display:flex; align-items:center; justify-content:space-between; gap:10px;
+      padding: 12px;
+      border-radius: 16px;
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(0,0,0,.15);
+      margin-bottom:10px;
+      text-align:left;
+    }
+    .listItem .left{ display:flex; align-items:center; gap:10px; }
+    .listItem .emoji{ font-size: 22px; }
+    .listItem .title{ font-weight: 1000; }
+    .listItem .sub{ font-size: 12px; color: var(--muted); margin-top:2px; line-height:1.2; }
+    .smallBtn{ padding: 10px 12px; border-radius: 12px; font-weight: 1000; }
 
     footer{ margin-top: 14px; color: var(--muted); font-size: 12px; text-align:center; }
   </style>
@@ -308,7 +333,7 @@
         <div class="logo" aria-hidden="true"></div>
         <div>
           <h1>Carbono Quiz — CO₂, CH₄ e clima 🌍</h1>
-          <p class="subtitle">5 fases (cada uma com 5 perguntas), tempo por fase, troféus do carbono e tentativa de bater seu próprio recorde.</p>
+          <p class="subtitle">5 fases (cada uma com 5 perguntas), tempo por fase, vidas, moedas, troféus, loja e ranking local.</p>
         </div>
       </div>
 
@@ -320,7 +345,7 @@
     </header>
 
     <div class="grid">
-      <!-- ESQUERDA: QUIZ -->
+      <!-- ESQUERDA -->
       <section class="card">
         <div class="head">
           <div>
@@ -331,36 +356,37 @@
           </div>
           <div class="row">
             <button class="btn-secondary" id="btnHelp" title="Dica rápida">💡 Dica</button>
-            <button class="btn-danger" id="btnReset" title="Zerar tudo (nome, troféus e recordes)">↺ Zerar</button>
+            <button class="btn-danger" id="btnReset" title="Zerar tudo (nome, moedas, loja, ranking, troféus)">↺ Zerar</button>
           </div>
         </div>
 
         <div class="body">
-          <!-- Tela inicial -->
+          <!-- START -->
           <div id="screenStart">
             <div class="row">
               <input id="playerName" type="text" maxlength="22" placeholder="Seu nome (ex: Ernandes, Ana, João...)">
               <button class="btn-start" id="btnStart">Começar 🚀</button>
             </div>
+
             <div style="margin-top:10px" class="subtitle">
-              Dica: as respostas são embaralhadas e não dá para “chutar pelo tamanho” 😄
+              Dica: as respostas são embaralhadas e não dá pra “chutar pelo tamanho” 😄
             </div>
 
             <div style="margin-top:14px" class="stats">
               <div class="stat">
                 <div class="k">Recorde geral (neste aparelho)</div>
                 <div class="v" id="bestScore">0%</div>
-                <div class="s">Melhor porcentagem somando as 5 fases.</div>
+                <div class="s">Melhor porcentagem geral registrada.</div>
               </div>
               <div class="stat">
                 <div class="k">Fase mais alta desbloqueada</div>
                 <div class="v" id="bestPhase">1</div>
-                <div class="s">Passe as fases com ≥70% para subir.</div>
+                <div class="s">Passe com ≥70% para subir.</div>
               </div>
             </div>
           </div>
 
-          <!-- Tela do quiz -->
+          <!-- QUIZ -->
           <div id="screenQuiz" class="hidden">
             <div class="row" style="justify-content:space-between">
               <div class="pill" id="hello">👤 Jogador</div>
@@ -369,16 +395,12 @@
 
             <div style="margin-top:12px">
               <div class="subtitle" style="margin-bottom:6px">Progresso da fase</div>
-              <div class="progress sm" aria-label="progresso da fase">
-                <div id="barPhase"></div>
-              </div>
+              <div class="progress sm"><div id="barPhase"></div></div>
             </div>
 
             <div style="margin-top:10px">
               <div class="subtitle" style="margin-bottom:6px">Progresso do jogo (5 fases)</div>
-              <div class="progress" aria-label="progresso do jogo">
-                <div id="barGame"></div>
-              </div>
+              <div class="progress"><div id="barGame"></div></div>
             </div>
 
             <div class="qwrap">
@@ -387,7 +409,7 @@
 
               <div class="answers" id="answers"></div>
 
-              <div class="toast" id="toast" title="Clique para fixar/desfixar o feedback"></div>
+              <div class="toast" id="toast" title="Clique para FIXAR/desfixar o feedback"></div>
 
               <div class="row" style="margin-top:12px; justify-content:space-between;">
                 <button class="btn-secondary" id="btnSkip" title="Pular (sem pontuar)">Pular ⏭️</button>
@@ -395,21 +417,22 @@
               </div>
 
               <div class="subtitle" style="margin-top:10px">
-                ⏱️ O tempo aparece lá em cima. Se acabar, você pode repetir a fase.
+                ⏱️ Tempo no topo. Feedback dura mais e você pode clicar nele para “fixar” e ler com calma.
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      <!-- DIREITA: Painel / troféus -->
+      <!-- DIREITA -->
       <aside class="card">
         <div class="head">
           <div>
             <div style="font-weight:1000">Painel do Carbono ⚛️</div>
-            <div class="subtitle">Seu nome, score ao vivo e troféus por fase.</div>
+            <div class="subtitle">Vidas, moedas, modo relâmpago, loja, ranking e troféus.</div>
           </div>
         </div>
+
         <div class="body">
           <div class="stat" style="margin-bottom:10px;">
             <div class="k">Score da fase</div>
@@ -423,13 +446,21 @@
             <div class="s" id="coach">Carbono é base da vida — o problema é o excesso de CO₂/CH₄ vindo de atividades humanas.</div>
           </div>
 
+          <div class="stat" style="margin-bottom:10px;">
+            <div class="k">Vidas / Moedas</div>
+            <div class="v"><span id="lives">❤️❤️❤️</span> · <span id="coins">0</span> 🪙</div>
+            <div class="s" id="modeInfo">Modo normal.</div>
+
+            <div class="row" style="margin-top:10px; justify-content:space-between;">
+              <button class="btn-secondary" id="btnShop">🛒 Loja</button>
+              <button class="btn-secondary" id="btnRanking">🏁 Ranking</button>
+              <button class="btn-secondary" id="btnLightning">⚡ Relâmpago</button>
+            </div>
+          </div>
+
           <div class="stat">
             <div class="k">Troféus do Carbono</div>
             <div class="trophies" id="trophies"></div>
-          </div>
-
-          <div style="margin-top:12px" class="subtitle">
-            Quer deixar ainda mais game depois? Dá pra colocar “vidas”, loja de badges, ranking local e modo “desafio relâmpago”.
           </div>
         </div>
       </aside>
@@ -440,7 +471,7 @@
     </footer>
   </div>
 
-  <!-- Modal Resultado -->
+  <!-- MODAL RESULTADO -->
   <div class="overlay" id="overlay">
     <div class="modal" role="dialog" aria-modal="true" aria-label="Resultado">
       <canvas id="confetti"></canvas>
@@ -462,11 +493,40 @@
     </div>
   </div>
 
+  <!-- MODAL LOJA -->
+  <div class="overlay" id="shopOverlay">
+    <div class="modal" role="dialog" aria-modal="true" aria-label="Loja de badges">
+      <div class="mhead">
+        <div class="pill">🛒 Loja de Badges</div>
+        <button class="btn-secondary" id="btnShopClose">Fechar ✖</button>
+      </div>
+      <div class="mbody" style="text-align:left">
+        <div class="subtitle">Gaste suas 🪙 moedas para desbloquear badges (colecionáveis).</div>
+        <div id="shopList" style="margin-top:12px"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL RANKING -->
+  <div class="overlay" id="rankOverlay">
+    <div class="modal" role="dialog" aria-modal="true" aria-label="Ranking local">
+      <div class="mhead">
+        <div class="pill">🏁 Ranking local</div>
+        <button class="btn-secondary" id="btnRankClose">Fechar ✖</button>
+      </div>
+      <div class="mbody" style="text-align:left">
+        <div class="subtitle">Top 10 neste aparelho (nome + % geral).</div>
+        <div id="rankList" style="margin-top:12px"></div>
+      </div>
+    </div>
+  </div>
+
   <script>
     /******************************************************************
-     * 0) CONFIG GERAL
+     * CONFIG
      ******************************************************************/
-    const PASS_SCORE = 70; // para passar de fase
+    const PASS_SCORE = 70;
+
     const ANSWER_GRADS = [
       "linear-gradient(90deg, rgba(255,79,183,.95), rgba(255,210,74,.95))",
       "linear-gradient(90deg, rgba(44,255,180,.95), rgba(90,168,255,.95))",
@@ -475,31 +535,30 @@
     ];
 
     const MOTIVATIONS_PASS = [
-      "Você passou! Agora o carbono vai ficar ainda mais interessante (e mais desafiador).",
+      "Você passou! Agora o carbono fica ainda mais interessante (e mais desafiador).",
       "Boa! Entender carbono é entender energia, vida e clima. Próxima fase!",
-      "Mandou bem — agora vem a parte mais “IPCC e mundo real”.",
-      "Vitória científica! Bora subir o nível."
+      "Vitória científica! Bora subir o nível.",
+      "Mandou bem — agora vem a parte mais “IPCC e mundo real”."
     ];
 
     const MOTIVATIONS_FAIL = [
-      "Não foi hoje — mas foi treino de verdade. Repete a fase e melhora 10%!",
+      "Não foi hoje — mas foi treino real. Repete a fase e melhora 10%!",
       "Errou? Isso é pista do que estudar. Você tá construindo cérebro de cientista.",
       "Tá tudo certo: conhecimento nasce de tentativa + ajuste. Bora de novo!",
       "Você não perdeu: você coletou dados do que precisa aprender. Repetir!"
     ];
 
     const COACH_TIPS = [
-      "CO₂: sobe com combustíveis fósseis e desmatamento; desce com fotossíntese e oceanos.",
-      "CH₄ (metano): vem de gado, arrozais, resíduos e vazamentos de óleo e gás.",
-      "O efeito estufa é natural; o aquecimento recente é a intensificação por emissões humanas.",
-      "No ciclo do carbono: atmosfera ↔ biosfera ↔ oceanos ↔ rochas (em escalas de tempo diferentes).",
-      "IPCC não faz leis: avalia evidências e cenários usados por governos e sociedade."
+      "CO₂ sobe com fósseis e desmatamento; desce com fotossíntese e oceanos.",
+      "CH₄ vem de gado, arrozais, resíduos e vazamentos de óleo e gás.",
+      "O efeito estufa é natural; o aquecimento recente é intensificação por emissões humanas.",
+      "Atmosfera ↔ biosfera ↔ oceanos ↔ rochas: escalas diferentes do ciclo do carbono.",
+      "IPCC avalia evidências e cenários — não é polícia, nem empresa."
     ];
 
-    // Tempo por fase (segundos). Você pode ajustar.
+    // Tempo por fase (normal). No relâmpago reduz automaticamente.
     const PHASE_TIME = [90, 80, 70, 65, 60];
 
-    // Troféus por fase
     const TROPHIES = [
       { emoji:"🪙", name:"Moeda de Carbono", desc:"Você dominou o básico: CO₂, CH₄ e ciclo simples." },
       { emoji:"🍃", name:"Folha Fixadora", desc:"Você entendeu fotossíntese, sumidouros e fluxos." },
@@ -509,11 +568,10 @@
     ];
 
     /******************************************************************
-     * 1) PERGUNTAS — 5 fases x 5 perguntas (25)
-     * (depois você pode trocar/expandir, mantendo o formato)
+     * PERGUNTAS — 5 fases x 5 (25)
      ******************************************************************/
     const QUESTIONS_BY_PHASE = [
-      // FASE 1 — bem básica
+      // FASE 1
       [
         { topic:"Química do carbono", q:"O CO₂ é formado por quais átomos?", options:["1 carbono + 2 oxigênios","2 carbonos + 1 oxigênio","1 carbono + 1 oxigênio","2 oxigênios + 2 carbonos"], a:"1 carbono + 2 oxigênios", why:"CO₂ = um carbono ligado a dois oxigênios." },
         { topic:"Gases de efeito estufa", q:"Qual gás é o principal emitido pela queima de gasolina, diesel e carvão?", options:["CO₂","CH₄","O₃","N₂"], a:"CO₂", why:"Queimar combustíveis fósseis libera principalmente CO₂." },
@@ -521,55 +579,67 @@
         { topic:"Metano", q:"CH₄ é mais conhecido como…", options:["metano","ozônio","nitrogênio","argônio"], a:"metano", why:"CH₄ é metano." },
         { topic:"Clima", q:"O efeito estufa é…", options:["natural e essencial para manter a Terra habitável","um fenômeno que só existe desde 2000","uma invenção do IPCC","algo que não tem relação com gases"], a:"natural e essencial para manter a Terra habitável", why:"O problema é a intensificação por excesso de gases." }
       ],
-
-      // FASE 2 — sumidouros e fontes
+      // FASE 2
       [
-        { topic:"Sumidouros", q:"Qual opção é um grande “sumidouro” (absorvedor) de CO₂?", options:["oceanos","estátuas de pedra","lâmpadas LED","asfalto"], a:"oceanos", why:"Os oceanos absorvem parte do CO₂ atmosférico (com efeitos na acidificação)." },
+        { topic:"Sumidouros", q:"Qual opção é um grande “sumidouro” (absorvedor) de CO₂?", options:["oceanos","estátuas de pedra","lâmpadas LED","asfalto"], a:"oceanos", why:"Oceanos absorvem parte do CO₂ atmosférico (com efeitos na acidificação)." },
         { topic:"Uso do solo", q:"Desmatamento tende a aumentar CO₂ porque…", options:["reduz a fotossíntese e libera carbono estocado","aumenta a chuva automaticamente","transforma CO₂ em oxigênio","faz o vento parar"], a:"reduz a fotossíntese e libera carbono estocado", why:"Menos plantas + queima/decomposição = mais CO₂." },
         { topic:"Metano", q:"Uma fonte comum de CH₄ é…", options:["gado (fermentação entérica)","painéis solares","rochas vulcânicas frias","árvores fazendo fotossíntese"], a:"gado (fermentação entérica)", why:"Ruminantes liberam metano durante a digestão." },
-        { topic:"Carbono na vida", q:"Por que o carbono aparece em tantos seres vivos?", options:["faz ligações estáveis e pode formar muitas moléculas diferentes","só existe na água","não se liga a nada","é o único átomo do universo"], a:"faz ligações estáveis e pode formar muitas moléculas diferentes", why:"Carbono é ótimo para construir cadeias e anéis (química orgânica)." },
-        { topic:"Comparação", q:"Em geral, CH₄ no curto prazo é… (comparado ao CO₂)", options:["mais potente como gás de efeito estufa","igual e sempre dura mais","menos potente e dura séculos","sem efeito nenhum"], a:"mais potente como gás de efeito estufa", why:"Metano tem forte efeito, mas fica menos tempo que CO₂." }
+        { topic:"Carbono na vida", q:"Por que o carbono aparece em tantos seres vivos?", options:["faz ligações estáveis e pode formar muitas moléculas diferentes","só existe na água","não se liga a nada","é o único átomo do universo"], a:"faz ligações estáveis e pode formar muitas moléculas diferentes", why:"Carbono forma cadeias e anéis (química orgânica)." },
+        { topic:"Comparação", q:"Em geral, CH₄ no curto prazo é… (comparado ao CO₂)", options:["mais potente como gás de efeito estufa","igual e sempre dura mais","menos potente e dura séculos","sem efeito nenhum"], a:"mais potente como gás de efeito estufa", why:"Metano tem efeito forte, mas dura menos que CO₂." }
       ],
-
-      // FASE 3 — números e fontes grandes/pequenas (sem exigir decorar)
+      // FASE 3
       [
         { topic:"Escalas", q:"Qual setor costuma ser uma grande fonte de CO₂ em muitos países?", options:["energia/transportes (queima de combustíveis)","pintura de paredes","patinação no gelo","chuva"], a:"energia/transportes (queima de combustíveis)", why:"Queima de fósseis é uma das maiores fontes globais de CO₂." },
         { topic:"Biogeoquímica", q:"Quando matéria orgânica apodrece sem oxigênio (ambiente anóxico), pode gerar mais…", options:["CH₄","He","NaCl","Ar"], a:"CH₄", why:"Decomposição anaeróbia pode produzir metano." },
         { topic:"Ciclo do carbono", q:"Qual caminho descreve melhor o ciclo do carbono?", options:["atmosfera ↔ plantas ↔ solo ↔ oceano ↔ atmosfera","vento → lua → oceano → Marte","chuva → fogo → gelo → rádio","sol → pedra → televisão → nuvem"], a:"atmosfera ↔ plantas ↔ solo ↔ oceano ↔ atmosfera", why:"O carbono circula entre reservatórios e processos." },
-        { topic:"Fontes pequenas", q:"Qual é uma fonte “pequena” mas real de CO₂ na vida diária?", options:["respiração humana","um satélite emitindo fumaça","um imã parado","uma sombra"], a:"respiração humana", why:"Respirar libera CO₂, mas isso faz parte do ciclo natural (não é a principal causa do aquecimento recente)." },
-        { topic:"Mudança climática", q:"O aquecimento atual é ligado principalmente a…", options:["aumento rápido de gases de efeito estufa por atividades humanas","mudança no formato da Terra a cada ano","desaparecimento da gravidade","mais nuvens porque sim"], a:"aumento rápido de gases de efeito estufa por atividades humanas", why:"A evidência aponta para emissões humanas como principal motor recente." }
+        { topic:"Fontes pequenas", q:"Qual é uma fonte “pequena” mas real de CO₂ na vida diária?", options:["respiração humana","um satélite emitindo fumaça","um imã parado","uma sombra"], a:"respiração humana", why:"Respiração faz parte do ciclo natural (não é a principal causa do aquecimento recente)." },
+        { topic:"Mudança climática", q:"O aquecimento atual é ligado principalmente a…", options:["aumento rápido de gases de efeito estufa por atividades humanas","mudança no formato da Terra a cada ano","desaparecimento da gravidade","mais nuvens porque sim"], a:"aumento rápido de gases de efeito estufa por atividades humanas", why:"A evidência aponta emissões humanas como principal motor recente." }
       ],
-
-      // FASE 4 — química e conceitos mais finos
+      // FASE 4
       [
-        { topic:"Estrutura", q:"No CO₂, a geometria mais comum da molécula é…", options:["linear","triangular plana","tetraédrica","em forma de U"], a:"linear", why:"CO₂ é O=C=O, geralmente linear." },
+        { topic:"Estrutura", q:"No CO₂, a geometria mais comum da molécula é…", options:["linear","triangular plana","tetraédrica","em forma de U"], a:"linear", why:"CO₂ é O=C=O e tende a ser linear." },
         { topic:"Ligações", q:"O carbono é especial porque pode…", options:["fazer 4 ligações covalentes e formar cadeias","fazer 1 ligação só e nada mais","não se ligar a oxigênio","virar metal com calor"], a:"fazer 4 ligações covalentes e formar cadeias", why:"Valência do carbono permite grande diversidade molecular." },
         { topic:"CO₂ vs CH₄", q:"Qual afirmação faz mais sentido?", options:["CH₄ costuma durar menos tempo na atmosfera que CO₂","CH₄ é sempre mais abundante que N₂","CO₂ não existe naturalmente","CH₄ não tem carbono"], a:"CH₄ costuma durar menos tempo na atmosfera que CO₂", why:"Metano tem vida atmosférica menor; CO₂ pode persistir por muito tempo." },
         { topic:"Reservatórios", q:"O maior reservatório de carbono na escala geológica é…", options:["rochas/carbonatos e sedimentos","nuvens","plástico","raios"], a:"rochas/carbonatos e sedimentos", why:"Há muito carbono armazenado em rochas e sedimentos." },
         { topic:"Feedbacks", q:"Um exemplo de “feedback” climático é…", options:["aquecimento derrete gelo e reduz albedo, aumentando aquecimento","chuva apaga o sol permanentemente","vento transforma CO₂ em ouro","som alto diminui temperatura global"], a:"aquecimento derrete gelo e reduz albedo, aumentando aquecimento", why:"Menos gelo = mais absorção de energia = mais aquecimento." }
       ],
-
-      // FASE 5 — IPCC, cenários e linguagem
+      // FASE 5
       [
-        { topic:"IPCC", q:"O IPCC faz o quê, principalmente?", options:["avalia evidências científicas e sintetiza relatórios","prende quem emite CO₂","vende créditos de carbono","controla o clima por satélite"], a:"avalia evidências científicas e sintetiza relatórios", why:"O IPCC é um painel de avaliação, não polícia nem empresa." },
-        { topic:"Cenários", q:"Cenários do IPCC (como SSPs) servem para…", options:["explorar futuros possíveis com diferentes emissões e decisões","provar que só existe um futuro","substituir medições reais","acertar a loteria"], a:"explorar futuros possíveis com diferentes emissões e decisões", why:"São caminhos plausíveis, usados para projeções e planejamento." },
-        { topic:"Mitigação", q:"Mitigar mudança climática significa…", options:["reduzir emissões e/ou aumentar remoção de gases","mudar o nome do carbono","aumentar CH₄ para competir com CO₂","apagar o sol"], a:"reduzir emissões e/ou aumentar remoção de gases", why:"Mitigação = atacar a causa (emissões/concentrações)." },
+        { topic:"IPCC", q:"O IPCC faz o quê, principalmente?", options:["avalia evidências científicas e sintetiza relatórios","prende quem emite CO₂","vende créditos de carbono","controla o clima por satélite"], a:"avalia evidências científicas e sintetiza relatórios", why:"O IPCC é um painel de avaliação (não é órgão de fiscalização)." },
+        { topic:"Cenários", q:"Cenários do IPCC (como SSPs) servem para…", options:["explorar futuros possíveis com diferentes emissões e decisões","provar que só existe um futuro","substituir medições reais","acertar a loteria"], a:"explorar futuros possíveis com diferentes emissões e decisões", why:"São caminhos plausíveis usados para projeções e planejamento." },
+        { topic:"Mitigação", q:"Mitigar mudança climática significa…", options:["reduzir emissões e/ou aumentar remoção de gases","mudar o nome do carbono","aumentar CH₄ para competir com CO₂","apagar o sol"], a:"reduzir emissões e/ou aumentar remoção de gases", why:"Mitigação = atacar a causa (emissões/concentração)." },
         { topic:"Adaptação", q:"Adaptação significa…", options:["ajustar cidades e sistemas para lidar com impactos (calor, cheias, secas)","emitir mais para equilibrar","ignorar o problema","trocar o oxigênio do ar"], a:"ajustar cidades e sistemas para lidar com impactos (calor, cheias, secas)", why:"Adaptação = lidar com efeitos já presentes ou previstos." },
-        { topic:"Mensagens-chave", q:"Qual frase é mais alinhada ao que a ciência usa como linguagem?", options:["‘Quanto menos emissões, menor o risco’","‘O clima não muda nunca’","‘A ciência já decidiu tudo e não mede mais’","‘CH₄ não tem efeito’"], a:"‘Quanto menos emissões, menor o risco’", why:"Reduzir emissões reduz aquecimento e riscos associados." }
+        { topic:"Mensagens-chave", q:"Qual frase é mais alinhada à linguagem científica?", options:["Quanto menos emissões, menor o risco","O clima não muda nunca","A ciência já decidiu tudo e não mede mais","CH₄ não tem efeito"], a:"Quanto menos emissões, menor o risco", why:"Reduzir emissões reduz aquecimento e riscos associados." }
       ]
     ];
 
     /******************************************************************
-     * 2) STORAGE
+     * LOJA / RANKING / RELÂMPAGO
      ******************************************************************/
-    const LS_NAME = "carbonFases_name";
-    const LS_UNLOCK = "carbonFases_unlock";      // maior fase desbloqueada (1..5)
-    const LS_BEST = "carbonFases_bestOverall";   // melhor score geral (%)
-    const LS_TROPH = "carbonFases_trophies";     // array bool [5]
-    const LS_LAST = "carbonFases_last";          // estado simples (opcional)
+    const SHOP = [
+      { id:"badge_atom",  emoji:"⚛️", name:"Átomo Craque", cost:6,  desc:"Badge: química do carbono" },
+      { id:"badge_leaf",  emoji:"🍃", name:"Sumidouro Verde", cost:7,  desc:"Badge: fotossíntese & sumidouros" },
+      { id:"badge_fire",  emoji:"🔥", name:"Fogo & Terras", cost:8,  desc:"Badge: uso do solo/queimadas" },
+      { id:"badge_lab",   emoji:"🧪", name:"Laboratório",    cost:9,  desc:"Badge: ligações e estruturas" },
+      { id:"badge_ipcc",  emoji:"🛰️", name:"IPCC Scout",     cost:10, desc:"Badge: cenários e evidências" },
+      { id:"badge_star",  emoji:"🌟", name:"Carbon Master",  cost:12, desc:"Badge: colecionador(a) top" }
+    ];
 
     /******************************************************************
-     * 3) UTIL
+     * STORAGE
+     ******************************************************************/
+    const LS_NAME   = "carbonFases_name";
+    const LS_UNLOCK = "carbonFases_unlock";
+    const LS_BEST   = "carbonFases_bestOverall";
+    const LS_TROPH  = "carbonFases_trophies";
+
+    const LS_COINS  = "carbonFases_coins";
+    const LS_BADGES = "carbonFases_badges";
+    const LS_RANK   = "carbonFases_rank";
+    const LS_LIGHT  = "carbonFases_lightning";
+
+    /******************************************************************
+     * HELPERS
      ******************************************************************/
     const $ = (id) => document.getElementById(id);
 
@@ -595,64 +665,14 @@
       return COACH_TIPS[Math.floor(Math.random()*COACH_TIPS.length)];
     }
 
-    function phasePct(){
-      if(state.answered === 0) return 0;
-      return Math.round((state.correct / state.answered) * 100);
+    function escapeHtml(s){
+      return String(s).replace(/[&<>"']/g, m => ({
+        "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"
+      }[m]));
     }
 
-    function overallPct(){
-      // score geral baseado em todas respondidas até agora no jogo (não inclui puladas)
-      if(state.totalAnswered === 0) return 0;
-      return Math.round((state.totalCorrect / state.totalAnswered) * 100);
-    }
-
-    /******************************************************************
-     * 4) ESTADO
-     ******************************************************************/
-    const state = {
-      player: "Visitante",
-      phase: 1,             // 1..5
-      qIndex: 0,            // 0..4
-      qList: [],            // 5 perguntas da fase
-      correct: 0,
-      wrong: 0,
-      answered: 0,
-
-      totalCorrect: 0,
-      totalAnswered: 0,
-
-      timerSec: 0,
-      timerId: null,
-      locked: false // trava clique duplo durante feedback
-    };
-
-    function loadProfile(){
-      const name = localStorage.getItem(LS_NAME);
-      if(name) state.player = name;
-
-      const unlock = Number(localStorage.getItem(LS_UNLOCK) || 1);
-      const best = Number(localStorage.getItem(LS_BEST) || 0);
-
-      $("playerName").value = state.player !== "Visitante" ? state.player : "";
-      $("bestScore").textContent = best + "%";
-      $("bestPhase").textContent = unlock;
-
-      renderTrophies();
-      setPlayerUI();
-    }
-
-    function saveProfile(){
-      localStorage.setItem(LS_NAME, state.player);
-    }
-
-    function getUnlock(){
-      return clamp(Number(localStorage.getItem(LS_UNLOCK) || 1), 1, 5);
-    }
-
-    function setUnlock(n){
-      localStorage.setItem(LS_UNLOCK, String(clamp(n,1,5)));
-      $("bestPhase").textContent = getUnlock();
-    }
+    function getUnlock(){ return clamp(Number(localStorage.getItem(LS_UNLOCK) || 1), 1, 5); }
+    function setUnlock(n){ localStorage.setItem(LS_UNLOCK, String(clamp(n,1,5))); }
 
     function getTrophyFlags(){
       try{
@@ -665,12 +685,89 @@
         return [false,false,false,false,false];
       }
     }
-
     function setTrophy(phase){
       const flags = getTrophyFlags();
       flags[phase-1] = true;
       localStorage.setItem(LS_TROPH, JSON.stringify(flags));
-      renderTrophies();
+    }
+
+    function getCoins(){ return Number(localStorage.getItem(LS_COINS) || 0); }
+    function setCoins(n){ localStorage.setItem(LS_COINS, String(Math.max(0, n|0))); }
+
+    function getBadges(){
+      try{ return JSON.parse(localStorage.getItem(LS_BADGES) || "[]"); }
+      catch{ return []; }
+    }
+    function setBadges(arr){ localStorage.setItem(LS_BADGES, JSON.stringify(arr)); }
+
+    function getLightning(){ return (localStorage.getItem(LS_LIGHT) === "1"); }
+    function setLightning(v){ localStorage.setItem(LS_LIGHT, v ? "1" : "0"); }
+
+    /******************************************************************
+     * STATE
+     ******************************************************************/
+    const state = {
+      player: "Visitante",
+
+      phase: 1,
+      qIndex: 0,
+      qList: [],
+
+      correct: 0,
+      wrong: 0,
+      answered: 0,
+
+      // geral do jogo (nesta rodada)
+      totalCorrect: 0,
+      totalAnswered: 0,
+
+      timerSec: 0,
+      timerId: null,
+
+      locked: false,
+
+      // game pack
+      livesLeft: 3,
+      lightning: getLightning()
+    };
+
+    function phasePct(){
+      if(state.answered === 0) return 0;
+      return Math.round((state.correct / state.answered) * 100);
+    }
+
+    function overallPct(){
+      if(state.totalAnswered === 0) return 0;
+      return Math.round((state.totalCorrect / state.totalAnswered) * 100);
+    }
+
+    /******************************************************************
+     * UI
+     ******************************************************************/
+    function setPlayerUI(){
+      $("pillPlayer").innerHTML = `👤 <strong>${escapeHtml(state.player)}</strong>`;
+      $("hello").textContent = `👤 ${state.player}`;
+    }
+
+    function setPhaseUI(){
+      $("pillPhase").innerHTML = `🏁 Fase <strong>${state.phase}/5</strong>`;
+      $("phaseIntro").innerHTML =
+        `Fase ${state.phase}: ${TROPHIES[state.phase-1].emoji} <strong>${TROPHIES[state.phase-1].name}</strong> — passe com <strong>${PASS_SCORE}%</strong> ou mais.`;
+    }
+
+    function setTimerUI(){
+      $("pillTimer").innerHTML = `⏱️ <strong>${formatTime(state.timerSec)}</strong>`;
+    }
+
+    function setCoachText(text){
+      $("coach").textContent = text;
+    }
+
+    function renderLivesCoins(){
+      const hearts = "❤️".repeat(Math.max(0,state.livesLeft)) + "🤍".repeat(Math.max(0,3-state.livesLeft));
+      $("lives").textContent = hearts;
+      $("coins").textContent = getCoins();
+      $("modeInfo").textContent = state.lightning ? "Modo relâmpago: tempo menor + bônus de moedas." : "Modo normal.";
     }
 
     function renderTrophies(){
@@ -686,6 +783,7 @@
 
         const div = document.createElement("div");
         div.className = "trophy" + (locked ? " lock" : "");
+
         const left = document.createElement("div");
         left.className = "left";
 
@@ -701,8 +799,7 @@
 
         const tag = document.createElement("div");
         tag.className = "tag";
-        if(locked) tag.textContent = "🔒 bloqueado";
-        else tag.textContent = got ? "🏆 ganho" : "⏳ pendente";
+        tag.textContent = locked ? "🔒 bloqueado" : (got ? "🏆 ganho" : "⏳ pendente");
 
         div.appendChild(left);
         div.appendChild(tag);
@@ -710,82 +807,48 @@
       });
     }
 
-    function setPlayerUI(){
-      $("pillPlayer").innerHTML = `👤 <strong>${escapeHtml(state.player)}</strong>`;
-      $("hello").textContent = `👤 ${state.player}`;
-    }
+    function updateHUD(){
+      $("counter").textContent = `Pergunta ${state.qIndex+1}/5`;
+      $("hits").textContent = `${state.correct} / ${state.wrong}`;
+      $("livePhaseScore").textContent = phasePct() + "%";
+      $("livePhaseReq").textContent = `Precisa de ${PASS_SCORE}% para passar.`;
 
-    function setPhaseUI(){
-      $("pillPhase").innerHTML = `🏁 Fase <strong>${state.phase}/5</strong>`;
-      const intro = `Fase ${state.phase}: ${TROPHIES[state.phase-1].emoji} <strong>${TROPHIES[state.phase-1].name}</strong> — passe com <strong>${PASS_SCORE}%</strong> ou mais.`;
-      $("phaseIntro").innerHTML = intro;
-    }
+      $("barPhase").style.width = `${Math.round((state.qIndex / 5) * 100)}%`;
+      $("barGame").style.width = `${Math.round((((state.phase-1)*5 + state.qIndex) / 25) * 100)}%`;
 
-    function setTimerUI(){
-      $("pillTimer").innerHTML = `⏱️ <strong>${formatTime(state.timerSec)}</strong>`;
-    }
-
-    function setCoachText(text){
-      $("coach").textContent = text;
-    }
-
-    function escapeHtml(s){
-      return String(s).replace(/[&<>"']/g, m => ({
-        "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"
-      }[m]));
+      setPhaseUI();
+      setTimerUI();
+      renderLivesCoins();
     }
 
     /******************************************************************
-     * 5) JOGO — FASE
+     * TOAST (feedback mais longo + fixar clicando)
      ******************************************************************/
-    function startGame(){
-      const raw = $("playerName").value.trim();
-      state.player = raw ? raw : "Visitante";
-      saveProfile();
-      setPlayerUI();
+    let toastTimeout = null;
 
-      // reset geral do jogo (mas sem apagar troféus/recorde do storage)
-      state.phase = 1;
-      state.totalCorrect = 0;
-      state.totalAnswered = 0;
+    function showToast(ok, title, why){
+      const t = $("toast");
+      t.classList.remove("pin");
+      t.style.display = "block";
+      t.style.borderColor = ok ? "rgba(44,255,180,.35)" : "rgba(255,79,183,.35)";
+      t.style.background = ok ? "rgba(44,255,180,.10)" : "rgba(255,79,183,.10)";
+      t.innerHTML = `${escapeHtml(title)}<small>${escapeHtml(why || "")}</small>`;
 
-      $("screenStart").classList.add("hidden");
-      $("screenQuiz").classList.remove("hidden");
-
-      startPhase(1, { enforceUnlock:false });
+      clearTimeout(toastTimeout);
+      toastTimeout = setTimeout(() => {
+        if(!t.classList.contains("pin")) t.style.display = "none";
+      }, 4500);
     }
 
-    function startPhase(phase, opts = { enforceUnlock:true }){
-      const unlock = getUnlock();
-      if(opts.enforceUnlock && phase > unlock){
-        // se tentar pular fase, cai na maior desbloqueada
-        phase = unlock;
-      }
+    $("toast").addEventListener("click", () => {
+      const t = $("toast");
+      if(t.style.display !== "block") return;
+      t.classList.toggle("pin");
+    });
 
-      state.phase = phase;
-      state.qIndex = 0;
-      state.correct = 0;
-      state.wrong = 0;
-      state.answered = 0;
-      state.locked = false;
-
-      // perguntas da fase (embaralha a ordem, mas mantém 5)
-      state.qList = shuffle(QUESTIONS_BY_PHASE[phase-1]);
-
-      // timer por fase
-      stopTimer();
-      state.timerSec = PHASE_TIME[phase-1];
-      setTimerUI();
-      state.timerId = setInterval(tickTimer, 1000);
-
-      setPhaseUI();
-      setCoachText(randCoach());
-
-      // barras
-      updateHUD();
-      renderQuestion();
-    }
-
+    /******************************************************************
+     * TIMER
+     ******************************************************************/
     function stopTimer(){
       if(state.timerId){
         clearInterval(state.timerId);
@@ -796,52 +859,20 @@
     function tickTimer(){
       state.timerSec--;
       setTimerUI();
-
       if(state.timerSec <= 0){
         stopTimer();
-        // tempo acabou: finaliza como falha da fase
         finishPhase({ reason:"time" });
       }
     }
 
-    function updateHUD(){
-      // fase
-      $("counter").textContent = `Pergunta ${state.qIndex+1}/5`;
-      $("hits").textContent = `${state.correct} / ${state.wrong}`;
-      $("livePhaseScore").textContent = phasePct() + "%";
-      $("livePhaseReq").textContent = `Precisa de ${PASS_SCORE}% para passar.`;
-
-      const phaseProgress = Math.round((state.qIndex / 5) * 100);
-      $("barPhase").style.width = phaseProgress + "%";
-
-      // jogo (0..25)
-      const gameProgress = Math.round((((state.phase-1)*5 + state.qIndex) / 25) * 100);
-      $("barGame").style.width = gameProgress + "%";
-
-      setPhaseUI();
-      setTimerUI();
+    function applyLightningTimer(){
+      if(!state.lightning) return;
+      state.timerSec = Math.max(20, Math.floor(state.timerSec * 0.65));
     }
 
-    function showToast(ok, title, why){
-      const t = $("toast");
-      t.classList.remove("pin");
-      t.style.display = "block";
-      t.style.borderColor = ok ? "rgba(44,255,180,.35)" : "rgba(255,79,183,.35)";
-      t.style.background = ok ? "rgba(44,255,180,.10)" : "rgba(255,79,183,.10)";
-      t.innerHTML = `${title}<small>${escapeHtml(why || "")}</small>`;
-
-      // MAIS TEMPO para ler (antes era curto)
-      // e se clicar no toast, ele “fixa” para você ler com calma
-      clearTimeout(showToast._to);
-      showToast._to = setTimeout(()=>{ if(!t.classList.contains("pin")) t.style.display="none"; }, 4200);
-    }
-
-    $("toast").addEventListener("click", () => {
-      const t = $("toast");
-      if(t.style.display !== "block") return;
-      t.classList.toggle("pin");
-    });
-
+    /******************************************************************
+     * RENDER QUESTION
+     ******************************************************************/
     function renderQuestion(){
       const item = state.qList[state.qIndex];
       $("qTitle").textContent = item.q;
@@ -863,6 +894,52 @@
       updateHUD();
     }
 
+    /******************************************************************
+     * GAME FLOW
+     ******************************************************************/
+    function startGame(){
+      const raw = $("playerName").value.trim();
+      state.player = raw ? raw : "Visitante";
+      localStorage.setItem(LS_NAME, state.player);
+
+      state.phase = 1;
+      state.totalCorrect = 0;
+      state.totalAnswered = 0;
+
+      $("screenStart").classList.add("hidden");
+      $("screenQuiz").classList.remove("hidden");
+
+      setPlayerUI();
+      startPhase(1, false);
+    }
+
+    function startPhase(phase, enforceUnlock=true){
+      const unlock = getUnlock();
+      if(enforceUnlock && phase > unlock) phase = unlock;
+
+      state.phase = phase;
+      state.qIndex = 0;
+      state.correct = 0;
+      state.wrong = 0;
+      state.answered = 0;
+      state.locked = false;
+
+      state.livesLeft = 3;
+
+      state.qList = shuffle(QUESTIONS_BY_PHASE[phase-1]);
+
+      stopTimer();
+      state.timerSec = PHASE_TIME[phase-1];
+      applyLightningTimer();
+      setTimerUI();
+      state.timerId = setInterval(tickTimer, 1000);
+
+      setCoachText(randCoach());
+      setPhaseUI();
+      renderLivesCoins();
+      renderQuestion();
+    }
+
     function answer(chosen){
       if(state.locked) return;
       state.locked = true;
@@ -876,15 +953,28 @@
       if(ok){
         state.correct++;
         state.totalCorrect++;
-        showToast(true, "✅ Boa! ", item.why);
+
+        const bonus = state.lightning ? 2 : 1;
+        setCoins(getCoins() + bonus);
+
+        showToast(true, "✅ Boa!", item.why);
       }else{
         state.wrong++;
-        showToast(false, "❌ Quase! ", item.why);
+        state.livesLeft--;
+
+        showToast(false, "❌ Quase!", item.why);
+
+        if(state.livesLeft <= 0){
+          stopTimer();
+          finishPhase({ reason:"lives" });
+          state.locked = false;
+          return;
+        }
       }
 
       setCoachText(randCoach());
+      updateHUD();
 
-      // avança após um “pulso” curto (mas sem sumir o feedback rápido demais)
       setTimeout(() => {
         state.locked = false;
         state.qIndex++;
@@ -899,9 +989,7 @@
           );
           renderQuestion();
         }
-      }, 450);
-
-      updateHUD();
+      }, 420);
     }
 
     function skip(){
@@ -915,43 +1003,104 @@
       }
     }
 
-    function finishPhase({ reason }){
-      // fecha toast (se não estiver fixo)
-      const t = $("toast");
-      if(!t.classList.contains("pin")) t.style.display = "none";
+    /******************************************************************
+     * RANKING LOCAL
+     ******************************************************************/
+    function pushRankingEntry(){
+      const entry = {
+        name: state.player,
+        score: overallPct(),
+        when: new Date().toLocaleString()
+      };
 
-      // barras
-      $("barPhase").style.width = "100%";
-      const gameProgress = Math.round((((state.phase-1)*5 + 5) / 25) * 100);
-      $("barGame").style.width = gameProgress + "%";
+      let rank = [];
+      try{ rank = JSON.parse(localStorage.getItem(LS_RANK) || "[]"); } catch { rank = []; }
 
-      const score = phasePct();
-      const passed = score >= PASS_SCORE && reason !== "time";
+      rank.push(entry);
+      rank.sort((a,b)=> b.score - a.score);
+      rank = rank.slice(0,10);
 
-      // desbloqueio + troféu
-      const unlock = getUnlock();
-      if(passed){
-        setTrophy(state.phase);
-        if(state.phase === unlock && unlock < 5){
-          setUnlock(unlock + 1);
-        }
+      localStorage.setItem(LS_RANK, JSON.stringify(rank));
+    }
+
+    function renderRanking(){
+      const box = $("rankList");
+      let rank = [];
+      try{ rank = JSON.parse(localStorage.getItem(LS_RANK) || "[]"); } catch { rank = []; }
+
+      if(rank.length === 0){
+        box.innerHTML = `<div class="subtitle">Ainda vazio. Termine fases para registrar seu score geral.</div>`;
+        return;
       }
 
-      // recorde geral (somente quando termina a fase 5 com jogo completo) — simples:
-      // aqui eu atualizo “bestOverall” sempre que você fecha uma fase, usando a média do progresso atual do jogo.
-      const overall = overallPct();
-      const best = Number(localStorage.getItem(LS_BEST) || 0);
-      if(overall > best){
-        localStorage.setItem(LS_BEST, String(overall));
-        $("bestScore").textContent = overall + "%";
-      }
-
-      // modal
-      showResultModal({ score, passed, reason, overall });
+      box.innerHTML = "";
+      rank.slice(0,10).forEach((r, i) => {
+        const div = document.createElement("div");
+        div.className = "listItem";
+        div.innerHTML = `
+          <div class="left">
+            <div class="emoji">${i===0?"🥇":i===1?"🥈":i===2?"🥉":"🏷️"}</div>
+            <div>
+              <div class="title">${escapeHtml(r.name)} — ${r.score}%</div>
+              <div class="sub">${escapeHtml(r.when)}</div>
+            </div>
+          </div>
+          <div class="pill"><strong>#${i+1}</strong></div>
+        `;
+        box.appendChild(div);
+      });
     }
 
     /******************************************************************
-     * 6) MODAL + CONFETTI
+     * LOJA
+     ******************************************************************/
+    function renderShop(){
+      const box = $("shopList");
+      const owned = new Set(getBadges());
+      box.innerHTML = "";
+
+      SHOP.forEach(item => {
+        const div = document.createElement("div");
+        div.className = "listItem";
+
+        const left = document.createElement("div");
+        left.className = "left";
+        left.innerHTML = `
+          <div class="emoji">${item.emoji}</div>
+          <div>
+            <div class="title">${escapeHtml(item.name)} — ${item.cost} 🪙</div>
+            <div class="sub">${escapeHtml(item.desc)}</div>
+          </div>
+        `;
+
+        const btn = document.createElement("button");
+        btn.className = "btn-secondary smallBtn";
+        const have = owned.has(item.id);
+        btn.textContent = have ? "✅ comprado" : "Comprar";
+        btn.disabled = have;
+
+        btn.onclick = () => {
+          const coins = getCoins();
+          if(coins < item.cost){
+            alert("Sem moedas suficientes 😅 Jogue mais para ganhar 🪙.");
+            return;
+          }
+          const arr = getBadges();
+          if(!arr.includes(item.id)) arr.push(item.id);
+          setBadges(arr);
+          setCoins(coins - item.cost);
+          renderLivesCoins();
+          renderShop();
+        };
+
+        div.appendChild(left);
+        div.appendChild(btn);
+        box.appendChild(div);
+      });
+    }
+
+    /******************************************************************
+     * CONFETTI
      ******************************************************************/
     const conf = { running:false, t0:0, duration:0, parts:[] };
 
@@ -1019,6 +1168,9 @@
       ctx.clearRect(0,0,c.width,c.height);
     }
 
+    /******************************************************************
+     * MODAL RESULTADO
+     ******************************************************************/
     function showResultModal({ score, passed, reason, overall }){
       $("overlay").style.display = "flex";
 
@@ -1033,7 +1185,13 @@
         msg = MOTIVATIONS_FAIL[Math.floor(Math.random()*MOTIVATIONS_FAIL.length)];
         tag = "Treino do Carbono 💪";
         stopConfetti();
-      }else if(passed){
+      } else if(reason === "lives"){
+        face = "😵‍💫";
+        title = `Acabaram as vidas, ${state.player}!`;
+        msg = "Mas tá tudo certo: joga de novo, agora você já sabe onde escorrega.";
+        tag = "Treino do Carbono 💪";
+        stopConfetti();
+      } else if(passed){
         if(score === 100){
           face = "🤩";
           title = `Perfeito! 100% na fase ${state.phase}!`;
@@ -1047,7 +1205,7 @@
           tag = "Subindo de nível ⬆️";
           startConfetti(800);
         }
-      }else{
+      } else {
         face = score >= 40 ? "🙂" : "😖";
         title = `Ainda não passou a fase ${state.phase}`;
         msg = MOTIVATIONS_FAIL[Math.floor(Math.random()*MOTIVATIONS_FAIL.length)];
@@ -1056,23 +1214,21 @@
       }
 
       const trophy = TROPHIES[state.phase-1];
+      const flags = getTrophyFlags();
+      const got = flags[state.phase-1];
+
       const phaseLine = `Fase ${state.phase}: ${score}% • Acertos: ${state.correct} • Erros: ${state.wrong}`;
       const overallLine = `Geral (nesta rodada): ${overall}%`;
+      const trophyLine = got ? `🏆 Troféu: ${trophy.emoji} ${trophy.name}` : `🎯 Troféu pendente: ${trophy.emoji} ${trophy.name}`;
 
       $("finalTag").textContent = tag;
       $("face").textContent = face;
       $("finalTitle").textContent = title;
       $("finalMsg").textContent = msg;
+      $("finalBadge").innerHTML = `${escapeHtml(phaseLine)}<br>${escapeHtml(overallLine)}<br>${escapeHtml(trophyLine)}`;
 
-      const got = getTrophyFlags()[state.phase-1];
-      const trophyTxt = got ? `🏆 Troféu: ${trophy.emoji} ${trophy.name}` : `🎯 Troféu pendente: ${trophy.emoji} ${trophy.name}`;
-
-      $("finalBadge").textContent = "";
-      $("finalBadge").innerHTML = `${escapeHtml(phaseLine)} • ${escapeHtml(overallLine)} • ${escapeHtml(trophyTxt)}`;
-
-      // Botão continuar: só segue se passou
       $("btnNext").disabled = !passed;
-      $("btnNext").style.filter = passed ? "none" : "grayscale(1) opacity(.6)";
+      $("btnNext").classList.toggle("btn-disabled", !passed);
     }
 
     function closeModal(){
@@ -1081,7 +1237,6 @@
     }
 
     function nextStep(){
-      // se passou, vai próxima fase (se existir) ou encerra
       const score = phasePct();
       const passed = score >= PASS_SCORE;
 
@@ -1089,23 +1244,62 @@
 
       if(state.phase < 5){
         closeModal();
-        startPhase(state.phase + 1, { enforceUnlock:true });
+        startPhase(state.phase + 1, true);
       }else{
-        // fim do jogo
+        // terminou a última fase: volta pro start
         closeModal();
         $("screenQuiz").classList.add("hidden");
         $("screenStart").classList.remove("hidden");
-        loadProfile();
+        loadProfileToStart();
       }
     }
 
     function retryPhase(){
       closeModal();
-      startPhase(state.phase, { enforceUnlock:true });
+      startPhase(state.phase, true);
     }
 
     /******************************************************************
-     * 7) AÇÕES
+     * FINALIZAR FASE (desbloqueio, troféu, recorde, ranking)
+     ******************************************************************/
+    function finishPhase({ reason }){
+      const score = phasePct();
+      const passed = (score >= PASS_SCORE) && (reason !== "time") && (reason !== "lives");
+      const unlock = getUnlock();
+
+      // troféu e unlock
+      if(passed){
+        setTrophy(state.phase);
+        if(state.phase === unlock && unlock < 5){
+          setUnlock(unlock + 1);
+        }
+      }
+
+      // recorde geral
+      const overall = overallPct();
+      const best = Number(localStorage.getItem(LS_BEST) || 0);
+      if(overall > best){
+        localStorage.setItem(LS_BEST, String(overall));
+      }
+
+      // ranking local
+      pushRankingEntry();
+
+      // atualizar painel troféus
+      renderTrophies();
+
+      // modal
+      showResultModal({ score, passed, reason, overall });
+    }
+
+    /******************************************************************
+     * OVERLAYS (shop/ranking)
+     ******************************************************************/
+    function openOverlay(id){ $(id).style.display = "flex"; }
+    function closeOverlay(id){ $(id).style.display = "none"; }
+
+    /******************************************************************
+     * DICA
      ******************************************************************/
     function showHelp(){
       const tip = randCoach();
@@ -1115,17 +1309,28 @@
       t.style.borderColor = "rgba(90,168,255,.35)";
       t.style.background = "rgba(90,168,255,.10)";
       t.innerHTML = `💡 Dica rápida<small>${escapeHtml(tip)}</small>`;
-      // fica fixo; clique para desfixar
     }
 
+    /******************************************************************
+     * RESET TOTAL
+     ******************************************************************/
     function hardReset(){
       stopTimer();
       stopConfetti();
+
       localStorage.removeItem(LS_NAME);
       localStorage.removeItem(LS_UNLOCK);
       localStorage.removeItem(LS_BEST);
       localStorage.removeItem(LS_TROPH);
+
+      localStorage.removeItem(LS_COINS);
+      localStorage.removeItem(LS_BADGES);
+      localStorage.removeItem(LS_RANK);
+      localStorage.removeItem(LS_LIGHT);
+
       state.player = "Visitante";
+      state.lightning = false;
+
       $("playerName").value = "";
       $("screenQuiz").classList.add("hidden");
       $("screenStart").classList.remove("hidden");
@@ -1133,12 +1338,34 @@
       $("barGame").style.width = "0%";
       $("barPhase").style.width = "0%";
       $("pillTimer").innerHTML = `⏱️ <strong>--:--</strong>`;
-      loadProfile();
+
+      loadProfileToStart();
       setCoachText("Zerou tudo. Agora é a sua chance de construir a trajetória: fase por fase. 💪");
     }
 
     /******************************************************************
-     * 8) EVENTOS
+     * LOAD START (stats)
+     ******************************************************************/
+    function loadProfileToStart(){
+      const name = localStorage.getItem(LS_NAME);
+      if(name) state.player = name;
+
+      const unlock = getUnlock();
+      const best = Number(localStorage.getItem(LS_BEST) || 0);
+
+      $("bestScore").textContent = best + "%";
+      $("bestPhase").textContent = unlock;
+
+      $("playerName").value = (state.player !== "Visitante") ? state.player : "";
+
+      state.lightning = getLightning();
+      setPlayerUI();
+      renderTrophies();
+      renderLivesCoins();
+    }
+
+    /******************************************************************
+     * BUTTONS
      ******************************************************************/
     $("btnStart").addEventListener("click", startGame);
     $("playerName").addEventListener("keydown", (e)=>{ if(e.key==="Enter") startGame(); });
@@ -1153,8 +1380,23 @@
     $("btnNext").addEventListener("click", nextStep);
     $("btnRetry").addEventListener("click", retryPhase);
 
-    // inicializa
-    loadProfile();
+    $("btnShop").addEventListener("click", ()=>{ renderShop(); openOverlay("shopOverlay"); });
+    $("btnShopClose").addEventListener("click", ()=> closeOverlay("shopOverlay"));
+
+    $("btnRanking").addEventListener("click", ()=>{ renderRanking(); openOverlay("rankOverlay"); });
+    $("btnRankClose").addEventListener("click", ()=> closeOverlay("rankOverlay"));
+
+    $("btnLightning").addEventListener("click", ()=>{
+      state.lightning = !state.lightning;
+      setLightning(state.lightning);
+      renderLivesCoins();
+      alert(state.lightning ? "⚡ Modo Relâmpago ATIVADO!" : "Modo Relâmpago desativado.");
+    });
+
+    /******************************************************************
+     * INIT
+     ******************************************************************/
+    loadProfileToStart();
   </script>
 </body>
 </html>
