@@ -373,8 +373,8 @@
     .hero-start:after{
       content:"CO₂";
       position:absolute;
-      right:58px;
-      top:42px;
+      right:24px;
+      top:-8px;
       font-size:112px;
       font-weight:1000;
       letter-spacing:-7px;
@@ -486,11 +486,13 @@
       min-height:430px;
       display:grid;
       place-items:center;
+      isolation:isolate;
     }
     .planet{
       width:280px;height:280px;
       border-radius:50%;
       position:relative;
+      z-index:1;
       background:
         radial-gradient(circle at 35% 30%, rgba(255,255,255,.35), transparent 8%),
         radial-gradient(circle at 36% 36%, #2cffb4 0 11%, transparent 12%),
@@ -534,11 +536,12 @@
       font-weight:1000;
       text-align:center;
       animation:bob 4s ease-in-out infinite;
+      z-index:3;
     }
     .gas small{display:block;font-size:10px;color:var(--muted);font-weight:700;margin-top:2px}
-    .gas.co2{left:4%;top:19%;animation-delay:-1s}
-    .gas.ch4{right:0;top:38%;animation-delay:-2.2s}
-    .gas.c{left:12%;bottom:10%;animation-delay:-3s}
+    .gas.co2{left:-4%;top:14%;animation-delay:-1s}
+    .gas.ch4{right:-6%;top:40%;animation-delay:-2.2s}
+    .gas.c{left:4%;bottom:14%;animation-delay:-3s}
     @keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
     .record-strip{
       position:absolute;
@@ -549,6 +552,7 @@
       display:grid;
       grid-template-columns:1fr 1fr;
       gap:10px;
+      z-index:3;
     }
     .record-mini{
       padding:12px;
