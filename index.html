@@ -323,17 +323,280 @@
     .smallBtn{ padding: 10px 12px; border-radius: 12px; font-weight: 1000; }
 
     footer{ margin-top: 14px; color: var(--muted); font-size: 12px; text-align:center; }
+  
+    /* ===== CARBON QUIZ 2.0 — EXPERIÊNCIA ===== */
+    body.intro-mode .grid{
+      grid-template-columns: 1fr;
+      max-width: 980px;
+      margin-left:auto;
+      margin-right:auto;
+    }
+    body.intro-mode aside.card{ display:none; }
+    body.intro-mode header .row{ display:none; }
+    body.intro-mode header{
+      justify-content:center;
+      margin-bottom:28px;
+    }
+    body.intro-mode .brand{
+      justify-content:center;
+      text-align:center;
+    }
+    body.intro-mode .brand .subtitle{ display:none; }
+    body.intro-mode .card{
+      background: linear-gradient(145deg, rgba(11,18,32,.78), rgba(8,13,24,.58));
+      border-color: rgba(255,255,255,.16);
+    }
+    body.intro-mode .card > .head{ display:none; }
+
+    .hero-start{
+      min-height: 620px;
+      position:relative;
+      display:grid;
+      grid-template-columns: 1.15fr .85fr;
+      align-items:center;
+      gap:38px;
+      padding:52px 44px;
+      isolation:isolate;
+      overflow:hidden;
+    }
+    .hero-start:before{
+      content:"";
+      position:absolute;
+      width:520px;height:520px;
+      border-radius:50%;
+      right:-160px;top:-180px;
+      background: radial-gradient(circle at 35% 30%, rgba(44,255,180,.46), rgba(90,168,255,.22) 38%, rgba(123,92,255,.10) 60%, transparent 72%);
+      filter:blur(4px);
+      z-index:-2;
+      animation: floatOrb 8s ease-in-out infinite;
+    }
+    .hero-start:after{
+      content:"CO₂";
+      position:absolute;
+      right:58px;
+      top:42px;
+      font-size:112px;
+      font-weight:1000;
+      letter-spacing:-7px;
+      color:rgba(255,255,255,.045);
+      z-index:-1;
+      transform:rotate(-7deg);
+    }
+    @keyframes floatOrb{
+      0%,100%{ transform:translate3d(0,0,0) scale(1); }
+      50%{ transform:translate3d(-18px,22px,0) scale(1.06); }
+    }
+    .eyebrow{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:7px 10px;
+      border-radius:999px;
+      border:1px solid rgba(44,255,180,.28);
+      background:rgba(44,255,180,.08);
+      color:#aaffdf;
+      font-size:12px;
+      font-weight:900;
+      letter-spacing:.7px;
+      text-transform:uppercase;
+      margin-bottom:14px;
+    }
+    .hero-title{
+      margin:0;
+      font-size:clamp(42px,7vw,76px);
+      line-height:.94;
+      letter-spacing:-3px;
+      max-width:720px;
+    }
+    .hero-title .accent{
+      background:linear-gradient(90deg,#2cffb4,#5aa8ff 50%,#ffd24a);
+      -webkit-background-clip:text;
+      background-clip:text;
+      color:transparent;
+    }
+    .hero-copy{
+      color:rgba(234,240,255,.78);
+      font-size:17px;
+      line-height:1.55;
+      max-width:620px;
+      margin:20px 0 24px;
+    }
+    .challenge{
+      margin:22px 0;
+      padding:18px;
+      border-radius:18px;
+      background:linear-gradient(135deg,rgba(255,210,74,.10),rgba(255,79,183,.08));
+      border:1px solid rgba(255,210,74,.20);
+      font-size:15px;
+      line-height:1.45;
+    }
+    .challenge strong{
+      display:block;
+      font-size:12px;
+      color:#ffd966;
+      letter-spacing:.7px;
+      text-transform:uppercase;
+      margin-bottom:5px;
+    }
+    .start-box{
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+      max-width:560px;
+    }
+    .start-box input{
+      width:100%;
+      box-sizing:border-box;
+      font-size:16px;
+      padding:15px 16px;
+      background:rgba(0,0,0,.26);
+    }
+    .start-box .btn-start{
+      width:100%;
+      padding:16px 18px;
+      font-size:17px;
+      border-radius:16px;
+      box-shadow:0 16px 34px rgba(44,255,180,.15);
+    }
+    .start-box .btn-start:hover{
+      transform:translateY(-2px);
+      filter:saturate(1.2) brightness(1.05);
+    }
+    .micro{
+      font-size:12px;
+      color:rgba(234,240,255,.58);
+      text-align:center;
+    }
+    .feature-chips{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+      margin-top:20px;
+    }
+    .feature-chip{
+      border:1px solid rgba(255,255,255,.13);
+      background:rgba(255,255,255,.055);
+      border-radius:999px;
+      padding:8px 10px;
+      font-size:12px;
+      color:rgba(234,240,255,.78);
+    }
+    .planet-stage{
+      position:relative;
+      min-height:430px;
+      display:grid;
+      place-items:center;
+    }
+    .planet{
+      width:280px;height:280px;
+      border-radius:50%;
+      position:relative;
+      background:
+        radial-gradient(circle at 35% 30%, rgba(255,255,255,.35), transparent 8%),
+        radial-gradient(circle at 36% 36%, #2cffb4 0 11%, transparent 12%),
+        radial-gradient(circle at 62% 58%, #36d99b 0 13%, transparent 14%),
+        radial-gradient(circle at 73% 35%, #84e577 0 8%, transparent 9%),
+        radial-gradient(circle at 45% 72%, #4bd57d 0 9%, transparent 10%),
+        radial-gradient(circle at 40% 40%, #4aa8ff, #1455a4 64%, #092b58 100%);
+      box-shadow: inset -30px -28px 55px rgba(0,0,0,.38), 0 0 70px rgba(90,168,255,.24), 0 30px 80px rgba(0,0,0,.42);
+      animation: planetFloat 5s ease-in-out infinite;
+    }
+    .planet:before{
+      content:"";
+      position:absolute;
+      inset:-24px;
+      border-radius:50%;
+      border:1px solid rgba(90,168,255,.28);
+      box-shadow:0 0 30px rgba(90,168,255,.12);
+    }
+    .planet:after{
+      content:"";
+      position:absolute;
+      inset:-66px;
+      border-radius:50%;
+      border:1px dashed rgba(255,255,255,.12);
+      animation:spin 18s linear infinite;
+    }
+    @keyframes planetFloat{
+      0%,100%{transform:translateY(0) rotate(-2deg)}
+      50%{transform:translateY(-10px) rotate(2deg)}
+    }
+    @keyframes spin{to{transform:rotate(360deg)}}
+    .gas{
+      position:absolute;
+      min-width:74px;
+      padding:10px 13px;
+      border-radius:14px;
+      backdrop-filter:blur(10px);
+      border:1px solid rgba(255,255,255,.17);
+      background:rgba(8,13,24,.58);
+      box-shadow:0 14px 35px rgba(0,0,0,.3);
+      font-weight:1000;
+      text-align:center;
+      animation:bob 4s ease-in-out infinite;
+    }
+    .gas small{display:block;font-size:10px;color:var(--muted);font-weight:700;margin-top:2px}
+    .gas.co2{left:4%;top:19%;animation-delay:-1s}
+    .gas.ch4{right:0;top:38%;animation-delay:-2.2s}
+    .gas.c{left:12%;bottom:10%;animation-delay:-3s}
+    @keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+    .record-strip{
+      position:absolute;
+      bottom:6px;
+      left:50%;
+      transform:translateX(-50%);
+      width:min(92%,460px);
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:10px;
+    }
+    .record-mini{
+      padding:12px;
+      border-radius:14px;
+      background:rgba(0,0,0,.22);
+      border:1px solid rgba(255,255,255,.12);
+      text-align:center;
+    }
+    .record-mini b{font-size:20px;display:block;margin-top:2px}
+    .record-mini span{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px}
+
+    /* jogo mais focado */
+    body:not(.intro-mode) .card:first-child{ border-color:rgba(90,168,255,.26); }
+    body:not(.intro-mode) .qtitle{ font-size:24px; line-height:1.28; }
+    body:not(.intro-mode) .answer{
+      padding:17px 16px;
+      font-size:15.5px;
+      transition:transform .15s ease, filter .15s ease, border-color .15s ease;
+    }
+    body:not(.intro-mode) .answer:hover{
+      transform:translateX(4px);
+      border-color:rgba(255,255,255,.32);
+    }
+    body:not(.intro-mode) .progress{ box-shadow:0 0 18px rgba(90,168,255,.10); }
+
+    @media (max-width:760px){
+      .hero-start{grid-template-columns:1fr;padding:34px 22px 28px;min-height:0}
+      .planet-stage{min-height:330px}
+      .planet{width:210px;height:210px}
+      .hero-title{letter-spacing:-2px}
+      .hero-copy{font-size:15px}
+      .record-strip{bottom:0}
+    }
+    @media (prefers-reduced-motion:reduce){
+      .hero-start:before,.planet,.planet:after,.gas{animation:none!important}
+    }
+
   </style>
 </head>
 
-<body>
+<body class="intro-mode">
   <div class="wrap">
     <header>
       <div class="brand">
         <div class="logo" aria-hidden="true"></div>
         <div>
           <h1>Carbono Quiz — CO₂, CH₄ e clima 🌍</h1>
-          <p class="subtitle">5 fases (cada uma com 5 perguntas), tempo por fase, vidas, moedas, troféus, loja e ranking local.</p>
+          <p class="subtitle">Uma jornada rápida sobre carbono, clima e escolhas.</p>
         </div>
       </div>
 
@@ -363,25 +626,44 @@
         <div class="body">
           <!-- START -->
           <div id="screenStart">
-            <div class="row">
-              <input id="playerName" type="text" maxlength="22" placeholder="Seu nome (ex: Ernandes, Ana, João...)">
-              <button class="btn-start" id="btnStart">Começar 🚀</button>
-            </div>
+            <div class="hero-start">
+              <div>
+                <div class="eyebrow">⚛️ Desafio do carbono</div>
+                <h2 class="hero-title">Você realmente entende o <span class="accent">carbono?</span></h2>
+                <p class="hero-copy">
+                  CO₂, CH₄, clima, ciclo do carbono e mundo real. São 5 fases curtas:
+                  você aprende, erra, tenta de novo e sobe de nível.
+                </p>
 
-            <div style="margin-top:10px" class="subtitle">
-              Dica: as respostas são embaralhadas e não dá pra “chutar pelo tamanho” 😄
-            </div>
+                <div class="challenge">
+                  <strong>Comece com esta provocação</strong>
+                  O carbono é o vilão da história — ou o problema está em onde ele está e em quanto colocamos na atmosfera?
+                </div>
 
-            <div style="margin-top:14px" class="stats">
-              <div class="stat">
-                <div class="k">Recorde geral (neste aparelho)</div>
-                <div class="v" id="bestScore">0%</div>
-                <div class="s">Melhor porcentagem geral registrada.</div>
+                <div class="start-box">
+                  <input id="playerName" type="text" maxlength="22" placeholder="Como quer aparecer no jogo?">
+                  <button class="btn-start" id="btnStart">JOGAR AGORA 🚀</button>
+                  <div class="micro">25 perguntas • 5 fases • 3 vidas • moedas, troféus e modo relâmpago</div>
+                </div>
+
+                <div class="feature-chips">
+                  <div class="feature-chip">🌍 clima</div>
+                  <div class="feature-chip">🔥 emissões</div>
+                  <div class="feature-chip">🌿 ciclo do carbono</div>
+                  <div class="feature-chip">⚡ desafio rápido</div>
+                </div>
               </div>
-              <div class="stat">
-                <div class="k">Fase mais alta desbloqueada</div>
-                <div class="v" id="bestPhase">1</div>
-                <div class="s">Passe com ≥70% para subir.</div>
+
+              <div class="planet-stage" aria-hidden="true">
+                <div class="gas co2">CO₂<small>dióxido de carbono</small></div>
+                <div class="gas ch4">CH₄<small>metano</small></div>
+                <div class="gas c">C<small>carbono</small></div>
+                <div class="planet"></div>
+
+                <div class="record-strip">
+                  <div class="record-mini"><span>Seu recorde</span><b id="bestScore">0%</b></div>
+                  <div class="record-mini"><span>Fase desbloqueada</span><b id="bestPhase">1</b></div>
+                </div>
               </div>
             </div>
           </div>
@@ -898,6 +1180,7 @@
      * GAME FLOW
      ******************************************************************/
     function startGame(){
+      document.body.classList.remove("intro-mode");
       const raw = $("playerName").value.trim();
       state.player = raw ? raw : "Visitante";
       localStorage.setItem(LS_NAME, state.player);
@@ -1250,6 +1533,7 @@
         closeModal();
         $("screenQuiz").classList.add("hidden");
         $("screenStart").classList.remove("hidden");
+        document.body.classList.add("intro-mode");
         loadProfileToStart();
       }
     }
@@ -1315,6 +1599,7 @@
      * RESET TOTAL
      ******************************************************************/
     function hardReset(){
+      document.body.classList.add("intro-mode");
       stopTimer();
       stopConfetti();
 
